@@ -20,7 +20,10 @@ def summation(n, term):
     """
     assert n >= 1
     "*** YOUR CODE HERE ***"
-
+    if n == 1: 
+        return term(n)
+    else: 
+        return term(n) + summation(n - 1, term)
 
 def paths(m, n):
     """Return the number of paths from one corner of an
@@ -36,7 +39,15 @@ def paths(m, n):
     1
     """
     "*** YOUR CODE HERE ***"
-
+    if m == 1 and n == 1: 
+        return 1
+    elif m == 0 or n == 0: 
+        return 0 
+    else: 
+        up = paths(m - 1, n)
+        right = paths(m, n - 1)
+        return up + right
+        
 
 def pascal(row, column):
     """Returns the value of the item in Pascal's Triangle
@@ -51,7 +62,12 @@ def pascal(row, column):
     6
     """
     "*** YOUR CODE HERE ***"
-
+    if row == 0 and column == 0:
+        return 1
+    elif column == 0 or column == row:
+        return 0 
+    else:
+        return pascal(row - 1, column -1) + pascal(row - 1, column)
 
 def double_eights(n):
     """ Returns whether or not n has two digits in row that
@@ -75,3 +91,7 @@ def double_eights(n):
     True
     """
     "*** YOUR CODE HERE ***"
+    last, second_last = n % 10, n //10 % 10
+    if n < 10:
+        return False
+    return(last == 8 and second_last == 8) or double_eights(n//10)
